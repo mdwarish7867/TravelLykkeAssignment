@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Travel{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Book Travel: {{ travel_option.travel_id }}</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ travel_option.source }} to {{ travel_option.destination }}</h5>
+        <p class="card-text">
+            <strong>Departure:</strong> {{ travel_option.departure_time|date:"M d, Y H:i" }}<br>
+            <strong>Arrival:</strong> {{ travel_option.arrival_time|date:"M d, Y H:i" }}<br>
+            <strong>Price per seat:</strong> ₹{{ travel_option.price }}<br>
+            <strong>Available seats:</strong> {{ travel_option.available_seats }}
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_number_of_seats" class="form-label">Number of Seats</label>
+                {{ form.number_of_seats }}
+                {% if form.number_of_seats.errors %}
+                    <div class="text-danger">
+                        {% for error in form.number_of_seats.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            <a href="{% url 'travel_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

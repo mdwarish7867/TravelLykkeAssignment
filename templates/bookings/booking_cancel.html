@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancel Booking{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Cancel Booking: {{ booking.booking_id }}</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ booking.travel_option.source }} to {{ booking.travel_option.destination }}</h5>
+        <p class="card-text">
+            <strong>Departure:</strong> {{ booking.travel_option.departure_time|date:"M d, Y H:i" }}<br>
+            <strong>Arrival:</strong> {{ booking.travel_option.arrival_time|date:"M d, Y H:i" }}<br>
+            <strong>Seats:</strong> {{ booking.number_of_seats }}<br>
+            <strong>Total Price:</strong> ₹{{ booking.total_price }}
+        </p>
+
+        <p>Are you sure you want to cancel this booking?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Cancel Booking</button>
+            <a href="{% url 'booking_list' %}" class="btn btn-secondary">No, Go Back</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

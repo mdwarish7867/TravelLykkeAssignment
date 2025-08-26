@@ -2,8 +2,11 @@
 
 Live Demo 👉 [https://travelease-p0ov.onrender.com](https://travelease-p0ov.onrender.com)
 
-**TravelEase** is a full-stack **Django-based travel booking application** built with **PostgreSQL** and styled with **Bootstrap**.  
-It allows users to browse travel options (Flights, Trains, Buses), make bookings, manage their profile, and view/cancel their tickets.
+Welcome to **TravelEase**, a simple and efficient **online travel booking system** built with **Django, PostgreSQL, and Bootstrap**.  
+This project was created as part of the **Travel Lykke Internship Assignment**.
+
+Users can register, browse travel options (flights, trains, buses), make bookings, manage their profile, and cancel tickets.  
+The app is fully configurable via `.env` file and deployed on **Render with PostgreSQL**. 🚀
 
 ---
 
@@ -14,9 +17,10 @@ It allows users to browse travel options (Flights, Trains, Buses), make bookings
 ✅ Book Tickets & Manage Bookings  
 ✅ Cancel Bookings Anytime  
 ✅ Responsive UI with **Bootstrap**  
-✅ Configurable via `.env` file  
+✅ Secure Configs via **.env File**  
 ✅ PostgreSQL Database Integration  
-✅ Deployed on **Render**
+✅ Filters & Search Options for Travel Plans  
+✅ Deployable on **Render**
 
 ---
 
@@ -26,67 +30,59 @@ It allows users to browse travel options (Flights, Trains, Buses), make bookings
 - **Frontend:** Django Templates + Bootstrap
 - **Database:** PostgreSQL
 - **Deployment:** Render
-- **Config:** `.env` file for secure credentials
+- **Environment:** `.env` file for secure configs
 
 ---
 
 ## 📂 Project Structure
 
+```
+
 travelease/
-├── TravelEase/ # Core project
-│ ├── init.py
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
-├── bookings/ # Bookings app
-│ ├── migrations/
-│ ├── init.py
-│ ├── admin.py
-│ ├── apps.py
-│ ├── forms.py
-│ ├── models.py
-│ ├── tests.py
-│ ├── urls.py
-│ └── views.py
-├── users/ # Users app
-│ ├── migrations/
-│ ├── init.py
-│ ├── admin.py
-│ ├── apps.py
-│ ├── forms.py
-│ ├── models.py
-│ ├── tests.py
-│ ├── urls.py
-│ └── views.py
-├── templates/ # HTML templates
-│ ├── base.html
-│ ├── registration/
-│ │ ├── login.html
-│ │ ├── register.html
-│ │ └── profile.html
-│ └── bookings/
-│ ├── travel_list.html
-│ ├── booking_form.html
-│ ├── booking_list.html
-│ └── booking_detail.html
-├── static/ # Static assets
-│ ├── css/style.css
-│ └── images/
-├── .env # Environment variables
+├── TravelEase/              # Core project settings
+│   ├── **init**.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── bookings/                # Bookings app
+│   ├── models.py            # Booking & TravelOption models
+│   ├── views.py             # Booking logic
+│   ├── forms.py             # Booking forms
+│   ├── urls.py
+│   └── admin.py
+├── users/                   # Users app
+│   ├── models.py            # Extended User Profile
+│   ├── views.py             # Auth & Profile logic
+│   ├── forms.py             # User forms
+│   ├── urls.py
+│   └── admin.py
+├── templates/               # Frontend templates
+│   ├── base.html
+│   ├── registration/
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   └── profile.html
+│   └── bookings/
+│       ├── booking\_list.html
+│       ├── travel\_list.html
+│       ├── booking\_form.html
+│       └── booking\_detail.html
+├── static/                  # Static files (CSS, JS, images)
+│   ├── css/style.css
+│   └── images/
+├── .env                     # Environment variables
 ├── .gitignore
 ├── requirements.txt
 ├── manage.py
 └── README.md
 
-yaml
-Copy
-Edit
+```
 
 ---
 
 ## 🔑 Environment Variables
 
-`.env` file example:
+Create a `.env` file in the project root:
 
 ```env
 PROJECT_NAME=TravelEase
@@ -97,64 +93,109 @@ SECRET_KEY=your-secret-key-here-change-in-production
 DB_NAME=travelease_db
 DB_USER=your_db_user
 DB_PASSWORD=yourpassword
-DB_HOST=localhost
+DB_HOST=your-db-host.render.com
 DB_PORT=5432
 
 # Deployment
 ALLOWED_HOSTS=127.0.0.1,localhost,travelease-p0ov.onrender.com
-⚡ Setup Instructions
-1️⃣ Clone Repository
-bash
-Copy
-Edit
+```
+
+---
+
+## ⚡ Setup Instructions
+
+### 1️⃣ Clone Repository
+
+```bash
 git clone https://github.com/mdwarish7867/TravelLykkeAssignment.git
 cd TravelLykkeAssignment
-2️⃣ Create Virtual Environment
-bash
-Copy
-Edit
-python -m venv venv
-venv\Scripts\activate   # Windows
-# OR
-source venv/bin/activate   # Linux/Mac
-3️⃣ Install Dependencies
-bash
-Copy
-Edit
-pip install -r requirements.txt
-4️⃣ Configure .env
-Update database credentials and project name as per your setup.
+```
 
-5️⃣ Run Migrations
-bash
-Copy
-Edit
+### 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # For Linux/Mac
+venv\Scripts\activate      # For Windows
+```
+
+### 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Configure `.env` File
+
+Update `.env` with your PostgreSQL credentials, project name, and secret key.
+
+### 5️⃣ Run Migrations
+
+```bash
 python manage.py makemigrations
 python manage.py migrate
-6️⃣ Create Superuser
-bash
-Copy
-Edit
+```
+
+### 6️⃣ Create Superuser
+
+```bash
 python manage.py createsuperuser
-7️⃣ Start Server
-bash
-Copy
-Edit
+```
+
+### 7️⃣ Start Development Server
+
+```bash
 python manage.py runserver
-Now visit 👉 http://127.0.0.1:8000/
+```
 
-🚀 Deployment
-This project is deployed on Render with PostgreSQL.
+Now visit 👉 `http://127.0.0.1:8000/`
 
-Live URL 👉 https://travelease-p0ov.onrender.com
+---
 
-📖 Future Improvements
+## 🚀 Deployment
+
+This project is deployed on **Render with PostgreSQL**.
+
+Live URL 👉 [https://travelease-p0ov.onrender.com](https://travelease-p0ov.onrender.com)
+
+- Collect static files:
+
+```bash
+python manage.py collectstatic
+```
+
+- Configure **ALLOWED_HOSTS** in `.env`
+- Push code to GitHub and connect to Render
+- Apply migrations on the server
+
+---
+
+## 📖 Future Improvements
+
 🔹 Add Payment Gateway (Stripe / Razorpay)
 🔹 Email Notifications for Bookings
 🔹 Advanced Filtering with Pagination
 🔹 REST API using Django REST Framework
 
-👨‍💻 Developer
-Developed by Mohammad Warish Ansari 💻
-🎯 Internship Assignment for Travel Lykke
-```
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! 🎉
+
+1. Fork the repo
+2. Create a new branch (`feature/your-feature`)
+3. Commit changes
+4. Push & create PR
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+### 👨‍💻 Developed by [Mohammad Warish Ansari](https://github.com/mdwarish7867)
+
+🎯 Internship Assignment for **Travel Lykke**
