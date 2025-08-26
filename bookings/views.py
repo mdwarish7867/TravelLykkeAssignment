@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import TravelOption, Booking
 from .forms import TravelSearchForm, BookingForm
+from django.utils import timezone
 
 def travel_list(request):
     travel_options = TravelOption.objects.all()
