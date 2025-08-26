@@ -107,3 +107,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/travel/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+ADMIN_SITE_HEADER = f"{PROJECT_NAME} Administration"
+ADMIN_SITE_TITLE = f"{PROJECT_NAME} Admin Portal"
+ADMIN_INDEX_TITLE = f"Welcome to {PROJECT_NAME} Admin Portal"

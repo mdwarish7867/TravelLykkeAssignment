@@ -1,34 +1,368 @@
+/* style.css */
+:root {
+    --primary: #0d6efd;
+    --secondary: #6c757d;
+    --success: #198754;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #0dcaf0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gradient: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+}
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
 }
 
 main {
     flex: 1;
 }
 
+/* Custom Card Styles */
 .card {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    transition: box-shadow 0.15s ease-in-out;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .card:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
-.booking-card {
-    border-left: 4px solid #0d6efd;
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--gradient);
+    color: white;
 }
 
-.booking-card.cancelled {
-    border-left-color: #dc3545;
+/* Button Styles */
+.btn {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.booking-card.completed {
-    border-left-color: #198754;
+.btn-primary {
+    background: var(--gradient);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0b5ed7 0%, #0baccc 100%);
+    transform: translateY(-2px);
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 0.75rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Alert Styles */
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
 }
 
 .form-label {
     font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Booking Card Styles */
+.booking-card {
+    border-left: 4px solid var(--primary);
+    transition: all 0.3s ease;
+}
+
+.booking-card:hover {
+    transform: translateX(5px);
+}
+
+.booking-card.cancelled {
+    border-left-color: var(--danger);
+}
+
+.booking-card.completed {
+    border-left-color: var(--success);
+}
+
+/* Badge Styles */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+    border-radius: 0.5rem;
+}
+
+/* Pagination Styles */
+.pagination .page-link {
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+    border: none;
+    color: var(--dark);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--gradient);
+    border: none;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: auto;
+}
+
+footer a {
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--info) !important;
+    transform: translateY(-2px);
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animate__animated.animate__fadeInUp {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Travel Card Styles */
+.travel-card {
+    transition: all 0.3s ease;
+}
+
+.travel-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.travel-type-badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.75em;
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--gradient);
+    color: white;
+    padding: 4rem 0;
+    border-radius: 0 0 2rem 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Custom Backgrounds */
+.bg-gradient-primary {
+    background: var(--gradient);
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* Additional styles for booking templates */
+.booking-timeline {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+}
+
+.booking-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px var(--primary);
+}
+
+.timeline-item.completed::before {
+    background: var(--success);
+    box-shadow: 0 0 0 3px var(--success);
+}
+
+.timeline-item.current::before {
+    background: white;
+    box-shadow: 0 0 0 3px var(--primary);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Price breakdown styles */
+.price-breakdown {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-total {
+    font-weight: bold;
+    border-top: 2px solid var(--primary);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+/* Booking status badges */
+.booking-status {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 500;
+}
+
+.status-confirmed {
+    background-color: rgba(25, 135, 84, 0.1);
+    color: var(--success);
+}
+
+.status-cancelled {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger);
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning);
+}
+
+/* Responsive adjustments for booking details */
+@media (max-width: 768px) {
+    .booking-timeline {
+        padding-left: 2rem;
+    }
+    
+    .booking-timeline::before {
+        left: 1rem;
+    }
+    
+    .timeline-item::before {
+        left: -2rem;
+    }
+    
+    .card-body.p-5 {
+        padding: 1.5rem !important;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+        border-radius: 0 0 1rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
 }

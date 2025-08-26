@@ -3,112 +3,126 @@
 {% block title %}Travel Options{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Available Travel Options</h2>
-
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">Search Filters</h5>
-        <form method="get" class="row g-3">
-            <div class="col-md-3">
-                <label for="id_travel_type" class="form-label">Travel Type</label>
-                {{ form.travel_type }}
-            </div>
-            <div class="col-md-3">
-                <label for="id_source" class="form-label">From</label>
-                {{ form.source }}
-            </div>
-            <div class="col-md-3">
-                <label for="id_destination" class="form-label">To</label>
-                {{ form.destination }}
-            </div>
-            <div class="col-md-3">
-                <label for="id_date" class="form-label">Date</label>
-                {{ form.date }}
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <a href="{% url 'travel_list' %}" class="btn btn-secondary">Clear</a>
-            </div>
-        </form>
+<!-- Hero Section -->
+<section class="hero-section text-center mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Discover Your Next Journey</h1>
+        <p class="lead animate__animated animate__fadeInUp">Find the perfect travel option for your next adventure</p>
     </div>
-</div>
+</section>
 
-{% if page_obj %}
-    <div class="row">
-        {% for travel in page_obj %}
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span class="badge bg-{% if travel.travel_type == 'FLIGHT' %}info{% elif travel.travel_type == 'TRAIN' %}success{% else %}warning{% endif %}">
-                            {{ travel.get_travel_type_display }}
-                        </span>
-                        <strong>{{ travel.travel_id }}</strong>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ travel.source }} to {{ travel.destination }}</h5>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <small class="text-muted">Departure</small>
-                                <p class="mb-0">{{ travel.departure_time|date:"M d, Y H:i" }}</p>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted">Arrival</small>
-                                <p class="mb-0">{{ travel.arrival_time|date:"M d, Y H:i" }}</p>
-                            </div>
+<div class="container">
+    <h2 class="mb-4 text-center fw-bold">Available Travel Options</h2>
+
+    <!-- Search Card -->
+    <div class="card mb-4 shadow-lg animate-on-scroll">
+        <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-search me-2"></i>Search Filters</h5>
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label for="id_travel_type" class="form-label">Travel Type</label>
+                    {{ form.travel_type }}
+                </div>
+                <div class="col-md-3">
+                    <label for="id_source" class="form-label">From</label>
+                    {{ form.source }}
+                </div>
+                <div class="col-md-3">
+                    <label for="id_destination" class="form-label">To</label>
+                    {{ form.destination }}
+                </div>
+                <div class="col-md-3">
+                    <label for="id_date" class="form-label">Date</label>
+                    {{ form.date }}
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-search me-2"></i>Search</button>
+                    <a href="{% url 'travel_list' %}" class="btn btn-outline-secondary btn-lg ms-2"><i class="bi bi-arrow-repeat me-2"></i>Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if page_obj %}
+        <div class="row">
+            {% for travel in page_obj %}
+                <div class="col-md-6 mb-4 animate-on-scroll">
+                    <div class="card h-100 travel-card">
+                        <div class="card-header d-flex justify-content-between align-items-center bg-gradient-primary text-white">
+                            <span class="travel-type-badge bg-light text-dark">
+                                <i class="bi {% if travel.travel_type == 'FLIGHT' %}bi-airplane{% elif travel.travel_type == 'TRAIN' %}bi-train-front{% else %}bi-bus-front{% endif %} me-1"></i>
+                                {{ travel.get_travel_type_display }}
+                            </span>
+                            <strong>{{ travel.travel_id }}</strong>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="fw-bold text-primary">₹{{ travel.price }}</span>
-                                <small class="text-muted">/ seat</small>
-                                <br>
-                                <small class="text-muted">{{ travel.available_seats }} seats available</small>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ travel.source }} <i class="bi bi-arrow-right mx-2"></i> {{ travel.destination }}</h5>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <small class="text-muted">Departure</small>
+                                    <p class="mb-0 fw-semibold">{{ travel.departure_time|date:"M d, Y H:i" }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Arrival</small>
+                                    <p class="mb-0 fw-semibold">{{ travel.arrival_time|date:"M d, Y H:i" }}</p>
+                                </div>
                             </div>
-                            {% if user.is_authenticated %}
-                                <a href="{% url 'booking_create' travel.travel_id %}" class="btn btn-primary">Book Now</a>
-                            {% else %}
-                                <a href="{% url 'login' %}" class="btn btn-outline-primary">Login to Book</a>
-                            {% endif %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold text-primary fs-4">₹{{ travel.price }}</span>
+                                    <small class="text-muted">/ seat</small>
+                                    <br>
+                                    <small class="text-muted"><i class="bi bi-people me-1"></i>{{ travel.available_seats }} seats available</small>
+                                </div>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'booking_create' travel.travel_id %}" class="btn btn-primary"><i class="bi bi-ticket-perforated me-2"></i>Book Now</a>
+                                {% else %}
+                                    <a href="{% url 'login' %}" class="btn btn-outline-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Login to Book</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
 
-    {% if page_obj.has_other_pages %}
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">First</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a>
-                    </li>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        {% if page_obj.has_other_pages %}
+            <nav aria-label="Page navigation" class="mt-5 animate-on-scroll">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
+                            <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="bi bi-chevron-double-left"></i> First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="bi bi-chevron-left"></i> Previous</a>
                         </li>
                     {% endif %}
-                {% endfor %}
 
-                {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Last</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next <i class="bi bi-chevron-right"></i></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Last <i class="bi bi-chevron-double-right"></i></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-info text-center animate-on-scroll">
+            <i class="bi bi-info-circle-fill me-2"></i>No travel options found matching your criteria.
+        </div>
     {% endif %}
-{% else %}
-    <div class="alert alert-info">No travel options found matching your criteria.</div>
-{% endif %}
+</div>
 {% endblock %}
